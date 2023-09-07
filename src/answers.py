@@ -9,7 +9,8 @@ def rd1_quetao_9(df):
 
     df_grouped = df_grouped.rename(columns={'id': 'count'})
 
-    df_grouped
+    df_grouped  
+    
 
     print(f'Dessa forma, temos {df_grouped.loc[0, "count"]} motos sendo vendidas por revendedores')
     print(f'E temos {df_grouped.loc[1, "count"]} motos sendo vendidas por seus donos')
