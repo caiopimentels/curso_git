@@ -1,9 +1,9 @@
 from io import BytesIO
+import app
 
 import pandas as pd
 import plotly.express as px
 import streamlit as st
-
 
 def rd1_question_9(df):
     df_grouped = df[["id", "seller_type"]].groupby("seller_type")
@@ -53,7 +53,7 @@ def rd1_question_13(df):
 
 
 def rd1_question_14(df):
-    st.text("As we can see, bikes with high kilometer have cheapier prices")
+    #st.text("As we can see, bikes with high kilometer have cheapier prices")
 
     fig = px.scatter(
         df,
@@ -238,12 +238,12 @@ def rd3_question_7(df):
     km_rodado = df["km_driven"] <= 40000
 
     # Columns
-    columns = ["id", "name", "selling_price", "km_driven", "year"]
+    columns = ["name", "selling_price", "km_driven", "year"]
 
     # Data Selection
     df_selected = df.loc[
         year & km_rodado & donos & vendedor & venda, columns
-    ].sort_values("selling_price", ascending=False)
+    ].sort_values("selling_price", ascending=False).reset_index()
 
     st.dataframe(df_selected)
 

@@ -7,7 +7,6 @@ from src.extraction import load_data
 
 st.set_page_config(layout="wide")
 
-
 def create_dataframe_section(df):
     st.title("XGB - Database")
     st.markdown("## Dashbord de acompanhamento de metricas")
@@ -20,8 +19,13 @@ def create_dataframe_section(df):
     year = st.sidebar.slider("Ano de fabricação",df.loc[:,'year'].min(),df.loc[:,'year'].max(),
                              value=[df.loc[:,'year'].min(),df.loc[:,'year'].max()])
 
-    km_rodado = st.sidebar.slider("Kilometragem",value=[df.loc[:,'km_driven'].min(),df.loc[:,'km_driven'].max()])
+    km_rodado = st.sidebar.slider("Quilometragem",value=[df.loc[:,'km_driven'].min(),df.loc[:,'km_driven'].max()])
     
+    fabricante = st.sidebar.multiselect("Fabricante",df.loc[:,'company'].unique(),df.loc[:,'company'].unique())
+
+    selecao = df['company'].isin(fabricante)
+    df = df.loc[selecao,:]
+
     selecao = df['year'].between(*year)
     df = df.loc[selecao,:]
 
@@ -40,8 +44,9 @@ def create_dataframe_section(df):
         st.metric("Modelo mais velho",df.loc[:,'year'].min(),help="Com base no filtro aplicado")
     
     with col4:
-        st.metric("Média de kilometragem", "{:,}".format(int(df.loc[:,'km_driven'].mean())).replace(",",".")+" km",
+        st.metric("Média de quilometragem", "{:,}".format(int(df.loc[:,'km_driven'].mean())).replace(",",".")+" km",
                   help="Com base no filtro aplicado")
+    return df
 
 def create_answers_section(df):
     st.markdown("---")
@@ -51,11 +56,11 @@ def create_answers_section(df):
     )
     asw.rd1_question_9(df)
 
-    st.subheader("Anúncios de unico dono")
+    st.subheader("Motos por número de donos")
     asw.rd1_question_13(df)
 
     st.subheader(
-        "Faixa de preço por kilometragem"
+        "Faixa de preço por quilometragem"
     )
     asw.rd1_question_14(df)
 
@@ -65,22 +70,22 @@ def create_answers_section(df):
     asw.rd2_question_1(df)
 
     st.subheader(
-        "Are the bikes that have more owners also the bikes with more kilometers traveled on avarege?"
+        "Quilometragem média por número de donos"
     )
     asw.rd2_question_2(df)
 
-    st.subheader("Which company has the most bikes registered?")
+    st.subheader("Quantidade de motos por fabricante")
     asw.rd2_question_7(df)
 
-    st.subheader("Which company has the most expensive bikes on avarege?")
+    st.subheader("Preço médio por fabricante")
     asw.rd3_question_2(df)
 
     st.subheader(
-        "Are the company that has the most expensive bikes registered also the company with the most bikes registered?"
+        "Quantidade de motos por valor por fabricante"
     )
     asw.rd3_question_5(df)
 
-    st.subheader("Which bikes are good for buying?")
+    st.subheader("Data base com base nos paramentros selecionados")
     asw.rd3_question_7(df)
 
 
