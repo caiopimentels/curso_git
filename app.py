@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import numpy as np
 
 import src.answers as asw
 from src.extraction import load_data
@@ -8,36 +9,59 @@ st.set_page_config(layout="wide")
 
 
 def create_dataframe_section(df):
-    st.title("Sctions - Database Description")
+    st.title("XGB - Database")
+    st.markdown("## Dashbord de acompanhamento de metricas")
 
-    col_1, col_2 = st.columns(2)
+    st.sidebar.image('image.jpg')
+    st.sidebar.markdown("### Xtreme Groovy Bikes")
+    st.sidebar.markdown("Sua melhor moto, você encontra aqui")
+    year = st.sidebar.slider("Selecione o ano de fabricação",df.loc[:,'year'].min(),df.loc[:,'year'].max(),
+                             value=[df.loc[:,'year'].min(),df.loc[:,'year'].max()])
 
-    col_1.header("Database")
-    col_1.dataframe(df, height=530)
+    km_rodado = st.sidebar.slider("Qual a kilometragem",value=[df.loc[:,'km_driven'].min(),df.loc[:,'km_driven'].max()])
+    
+    selecao = df['year'].isin(year)
 
-    col_2.header("Data Description")
+    df = df.loc[selecao,:]
+    
+    col1, col2, col3, col4 = st.columns(4)
 
-    data_description = """
-                        | Coluna | Descrição |
-                        | :----- | --------: |
-                        | ID | Identificador da linha/registro |
-                        | name | Fabricante e Modelo da Moto |
-                        | selling_price | Preço de Venda |
-                        | year | Ano de Fabricação da Moto |
-                        | seller_type | Tipo de Vendedor - Se é vendedor pessoal ou revendedor |
-                        | owner | Se é primeiro, segundo, terceiro ou quarto dono da moto |
-                        | km_driven | Quantidade de Quilometros percorrido pela moto |
-                        | ex_showroom_price | Preço da motocicleta sem as taxas de seguro e registro |
-                        | age | Quantidade de anos em que a moto está em uso |
-                        | km_class | Classificação das motos conforme a quilometragem percorrida |
-                        | km_per_year | Quantidade de Quilometros percorridos a cada ano |
-                        | km_per_month | Quantidade de Quilometros percorridos por mês |
-                        | company | Fabricanete da Motocicleta |
-    """
+    with col1:
+        st.metric("Nº de motos na base", df.shape[0])
+    
+    with col2:
+        st.metric("Modelo mais novo",df.loc[:,'year'].max())
 
-    col_2.markdown(data_description)
+    with col3:
+        st.metric("Modelo mais velho",df.loc[:,'year'].min())
+    
+    with col4:
+        st.metric("Média de kilometragem", "{:,}".format(int(df.loc[:,'km_driven'].mean())).replace(",",".")+" km")
 
+    # col_1.header("Database")
+    # col_1.dataframe(df, height=530)
 
+#    col_2.header("Data Description")
+
+#     data_description = """
+#                         | Coluna | Descrição |
+#                         | :----- | --------: |
+#                         | ID | Identificador da linha/registro |
+#                         | name | Fabricante e Modelo da Moto |
+#                         | selling_price | Preço de Venda |
+#                         | year | Ano de Fabricação da Moto |
+#                         | seller_type | Tipo de Vendedor - Se é vendedor pessoal ou revendedor |
+#                         | owner | Se é primeiro, segundo, terceiro ou quarto dono da moto |
+#                         | km_driven | Quantidade de Quilometros percorrido pela moto |
+#                         | ex_showroom_price | Preço da motocicleta sem as taxas de seguro e registro |
+#                         | age | Quantidade de anos em que a moto está em uso |
+#                         | km_class | Classificação das motos conforme a quilometragem percorrida |
+#                         | km_per_year | Quantidade de Quilometros percorridos a cada ano |
+#                         | km_per_month | Quantidade de Quilometros percorridos por mês |
+#                         | company | Fabricanete da Motocicleta |
+#     """
+
+#     col_2.markdown(data_description)
 def create_answers_section(df):
     st.title("Main Questions Answers")
 
