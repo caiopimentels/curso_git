@@ -16,7 +16,7 @@ def create_dataframe_section(df):
     st.sidebar.markdown("### Xtreme Groovy Bikes")
     st.sidebar.markdown("Sua melhor moto, você encontra aqui")
 
-    year = st.sidebar.slider("Ano de fabricação",df.loc[:,'year'].min(),df.loc[:,'year'].max(),
+    year_selecao = st.sidebar.slider("Ano de fabricação",df.loc[:,'year'].min(),df.loc[:,'year'].max(),
                              value=[df.loc[:,'year'].min(),df.loc[:,'year'].max()])
 
     km_rodado = st.sidebar.slider("Quilometragem",value=[df.loc[:,'km_driven'].min(),df.loc[:,'km_driven'].max()])
@@ -26,7 +26,7 @@ def create_dataframe_section(df):
     selecao = df['company'].isin(fabricante)
     df = df.loc[selecao,:]
 
-    selecao = df['year'].between(*year)
+    selecao = df['year'].between(*year_selecao)
     df = df.loc[selecao,:]
 
     selecao = df['km_driven'].between(*km_rodado)
