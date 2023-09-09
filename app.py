@@ -5,7 +5,7 @@ import numpy as np
 import src.answers as asw
 from src.extraction import load_data
 
-#st.set_page_config(layout="wide")
+st.set_page_config(layout="wide")
 
 def create_dataframe_section(df):
     st.title("XGB - Database")
