@@ -1,5 +1,4 @@
 from io import BytesIO
-import app
 
 import pandas as pd
 import plotly.express as px
@@ -269,7 +268,7 @@ def to_excel(df):
 
     worksheet.set_column("A:A", None)
 
-    writer.save()
+    writer.close()
 
     processed_data = output.getvalue()
 
