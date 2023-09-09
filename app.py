@@ -2,10 +2,10 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 
-st.set_page_config(layout="wide")
-
 import src.answers as asw
 from src.extraction import load_data
+
+st.set_page_config(layout="wide")
 
 def create_dataframe_section(df):
     st.title("XGB - Database")
