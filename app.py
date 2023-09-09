@@ -31,10 +31,10 @@ def create_dataframe_section(df):
     selecao = df['company'].isin(fabricante)
     df = df.loc[selecao,:]
 
-    selecao = df['year'].between(year_selecao[0], year_selecao[1])
+    selecao = df['year'].between(year_selecao.min(), year_selecao.max())
     df = df.loc[selecao,:]
 
-    selecao = df['km_driven'].between(km_rodado[0], km_rodado[1])
+    selecao = df['km_driven'].between(km_rodado.min(), km_rodado.max())
     df = df.loc[selecao,:]
     
     col1, col2, col3, col4 = st.columns(4)
