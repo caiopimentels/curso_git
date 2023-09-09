@@ -21,10 +21,10 @@ def create_dataframe_section(df):
 
     year_selecao = st.sidebar.slider("Ano de fabricação", min_year, max_year, min_year)
 
-    min_km = df.loc[:,'km_driven'].min()
-    max_km = df.loc[:,'km_driven'].max()
+    min_km = int(df.loc[:,'km_driven'].min())
+    max_km = int(df.loc[:,'km_driven'].max())
     
-    km_rodado = st.sidebar.slider("Quilometragem",min_km, max_km, min_km)
+    km_rodado = st.sidebar.slider("Quilometragem", min_km, max_km, min_km)
     
     fabricante = st.sidebar.multiselect("Fabricante",df.loc[:,'company'].unique(),df.loc[:,'company'].unique())
 
