@@ -18,7 +18,7 @@ def create_dataframe_section(df):
 
     min_year, max_year = list(df.loc[:,'year'].min(), df.loc[:,'year'].max())
 
-    year_selecao = st.sidebar.slider("Ano de fabricação", min_year, max_year
+    year_selecao = st.sidebar.slider("Ano de fabricação", min_year, max_year,
                              value=[min_year, max_year])
 
     min_km = df.loc[:,'km_driven'].min()
