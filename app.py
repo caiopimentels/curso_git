@@ -5,7 +5,7 @@ import numpy as np
 import src.answers as asw
 from src.extraction import load_data
 
-st.set_page_config(layout="wide")
+#st.set_page_config(layout="wide")
 
 def create_dataframe_section(df):
     st.title("XGB - Database")
@@ -19,22 +19,23 @@ def create_dataframe_section(df):
     min_year = int(df.loc[:,'year'].min())
     max_year = int(df.loc[:,'year'].max())
 
-    year_selecao = st.sidebar.slider("Ano de fabricação", min_year, max_year, min_year)
+    year_selecao = st.sidebar.slider("Ano de fabricação", min_year, max_year, value=[min_year, max_year])
+    
 
     min_km = int(df.loc[:,'km_driven'].min())
     max_km = int(df.loc[:,'km_driven'].max())
     
-    km_rodado = st.sidebar.slider("Quilometragem", min_km, max_km, min_km)
+    km_rodado = st.sidebar.slider("Quilometragem", min_km, max_km, value=[min_km, max_km])
     
     fabricante = st.sidebar.multiselect("Fabricante",df.loc[:,'company'].unique(),df.loc[:,'company'].unique())
 
     selecao = df['company'].isin(fabricante)
     df = df.loc[selecao,:]
 
-    selecao = df['year'].between(year_selecao.min(), year_selecao.max())
+    selecao = df['year'].between(*year_selecao)
     df = df.loc[selecao,:]
 
-    selecao = df['km_driven'].between(km_rodado.min(), km_rodado.max())
+    selecao = df['km_driven'].between(*km_rodado)
     df = df.loc[selecao,:]
     
     col1, col2, col3, col4 = st.columns(4)
