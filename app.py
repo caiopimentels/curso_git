@@ -5,7 +5,7 @@ import numpy as np
 import src.answers as asw
 from src.extraction import load_data
 
-#st.set_page_config(layout="wide")
+st.set_page_config(layout="wide")
 
 def create_dataframe_section(df):
     st.title("XGB - Database")
@@ -24,7 +24,7 @@ def create_dataframe_section(df):
     min_km = df.loc[:,'km_driven'].min()
     max_km = df.loc[:,'km_driven'].max()
     
-    km_rodado = st.sidebar.slider("Quilometragem",value=[min_km, max_km])
+    km_rodado = st.sidebar.slider("Quilometragem",min_km, max_km, min_km)
     
     fabricante = st.sidebar.multiselect("Fabricante",df.loc[:,'company'].unique(),df.loc[:,'company'].unique())
 
