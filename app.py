@@ -54,7 +54,8 @@ def create_dataframe_section(df):
 
 def create_answers_section(df):
     st.markdown("---")
-    st.header("Gráficos")
+    
+    st.header("Primeira rodada")
     st.subheader(
         "Distribuição das motos anunciadas"
     )
@@ -68,6 +69,8 @@ def create_answers_section(df):
     )
     asw.rd1_question_14(df)
 
+    st.markdown("---")
+    st.header("Segunda rodada")
     st.subheader(
         "Faixa de preço por número de donos"
     )
@@ -81,6 +84,8 @@ def create_answers_section(df):
     st.subheader("Quantidade de motos por fabricante")
     asw.rd2_question_7(df)
 
+    st.markdown("---")
+    st.header("Terceira rodada")
     st.subheader("Preço médio por fabricante")
     asw.rd3_question_2(df)
 
