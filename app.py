@@ -16,7 +16,8 @@ def create_dataframe_section(df):
     st.sidebar.markdown("### Xtreme Groovy Bikes")
     st.sidebar.markdown("Sua melhor moto, você encontra aqui")
 
-    min_year, max_year = list(df.loc[:,'year'].min(), df.loc[:,'year'].max())
+    min_year = df.loc[:,'year'].min()
+    max_year = df.loc[:,'year'].max()
 
     year_selecao = st.sidebar.slider("Ano de fabricação", min_year, max_year,
                              value=[min_year, max_year])
