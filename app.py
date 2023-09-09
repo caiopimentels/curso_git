@@ -16,10 +16,16 @@ def create_dataframe_section(df):
     st.sidebar.markdown("### Xtreme Groovy Bikes")
     st.sidebar.markdown("Sua melhor moto, você encontra aqui")
 
-    year_selecao = st.sidebar.slider("Ano de fabricação",df.loc[:,'year'].min(),df.loc[:,'year'].max(),
-                             value=[df.loc[:,'year'].min(),df.loc[:,'year'].max()])
+    min_year = df.loc[:,'year'].min()
+    max_year = df.loc[:,'year'].max()
 
-    km_rodado = st.sidebar.slider("Quilometragem",value=[df.loc[:,'km_driven'].min(),df.loc[:,'km_driven'].max()])
+    year_selecao = st.sidebar.slider("Ano de fabricação", min_year, max_year
+                             value=[min_year, max_year])
+
+    min_km = df.loc[:,'km_driven'].min()
+    max_km = df.loc[:,'km_driven'].max()
+    
+    km_rodado = st.sidebar.slider("Quilometragem",value=[min_km, max_km])
     
     fabricante = st.sidebar.multiselect("Fabricante",df.loc[:,'company'].unique(),df.loc[:,'company'].unique())
 
