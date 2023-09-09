@@ -1,4 +1,5 @@
 from io import BytesIO
+import app
 
 import pandas as pd
 import plotly.express as px
@@ -249,7 +250,7 @@ def rd3_question_7(df):
     df_xlsx = to_excel(df_selected)
 
     st.download_button(
-        label="📥 Download Buyinbg Suggestions",
+        label="📥 Download da Sugestão",
         data=df_xlsx,
         file_name="buing_suggestions.xlsx",
     )

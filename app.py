@@ -2,10 +2,10 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 
+st.set_page_config(layout="wide")
+
 import src.answers as asw
 from src.extraction import load_data
-
-st.set_page_config(layout="wide")
 
 def create_dataframe_section(df):
     st.title("XGB - Database")
@@ -20,7 +20,6 @@ def create_dataframe_section(df):
     max_year = int(df.loc[:,'year'].max())
 
     year_selecao = st.sidebar.slider("Ano de fabricação", min_year, max_year, value=[min_year, max_year])
-    
 
     min_km = int(df.loc[:,'km_driven'].min())
     max_km = int(df.loc[:,'km_driven'].max())
@@ -52,7 +51,6 @@ def create_dataframe_section(df):
     with col4:
         st.metric("Média de quilometragem", "{:,}".format(int(df.loc[:,'km_driven'].mean())).replace(",",".")+" km",
                   help="Com base no filtro aplicado")
-    return df
 
 def create_answers_section(df):
     st.markdown("---")
@@ -93,7 +91,6 @@ def create_answers_section(df):
 
     st.subheader("Data base com base nos paramentros selecionados")
     asw.rd3_question_7(df)
-
 
 def create_main_layout():
     df = load_data()
